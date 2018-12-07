@@ -11,7 +11,8 @@
  */
 
 /**
- * @author amrbedawi
+ * @author Amr Bedawi
+ * @author Loten Lhatsang
  */
 public class HuffProcessor {
 
