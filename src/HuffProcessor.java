@@ -101,7 +101,7 @@ public class HuffProcessor {
 		
 		String [] encodings = new String[ALPH_SIZE +1];
 		codingHelper(root, "", encodings);
-		return null;
+		return encodings;
 	}
 
 	private void codingHelper(HuffNode root, String path, String[] encodings) {
@@ -129,8 +129,6 @@ public class HuffProcessor {
 
 	private void writeCompressedBits(String[] codings, BitInputStream in, BitOutputStream out) {
 		// TODO Auto-generated method stub
-		if(codings == null) return; 
-		int test = codings.length; 
 		while(true) {
 			int bits = in.readBits(BITS_PER_WORD);
 			if(bits == -1) break;
