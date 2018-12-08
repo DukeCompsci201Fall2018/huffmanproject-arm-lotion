@@ -129,6 +129,7 @@ public class HuffProcessor {
 
 	private void writeCompressedBits(String[] codings, BitInputStream in, BitOutputStream out) {
 		// TODO Auto-generated method stub
+		if(codings == null) return; 
 		int test = codings.length; 
 		while(true) {
 			int bits = in.readBits(BITS_PER_WORD);
