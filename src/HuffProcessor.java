@@ -98,7 +98,21 @@ public class HuffProcessor {
 
 	private String[] makeCodingsFromTree(HuffNode root) {
 		// TODO Auto-generated method stub
+		
+		String [] encodings = new String[ALPH_SIZE +1];
+		codingHelper(root, "", encodings);
 		return null;
+	}
+
+	private void codingHelper(HuffNode root, String path, String[] encodings) {
+		// TODO Auto-generated method stub
+		if(root.myLeft==null && root.myRight==null) {
+			encodings[root.myValue]= path;
+			return;
+		}
+		
+		codingHelper(root.myLeft, path+"0",encodings);
+		codingHelper(root.myRight, path+"1",encodings);
 	}
 
 	private void writeHeader(HuffNode root, BitOutputStream out) {
