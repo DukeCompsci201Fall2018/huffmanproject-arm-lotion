@@ -91,7 +91,7 @@ public class HuffProcessor {
 			HuffNode t= new HuffNode(0,left.myWeight+right.myWeight,left,right);
 			pq.add(t);
 		}
-		HuffNode root= pq.remove();
+		HuffNode root = pq.remove();
 		
 		return root;
 	}
@@ -109,11 +109,11 @@ public class HuffProcessor {
 		if(root == null) return; 
 		if(root.myLeft==null && root.myRight==null) {
 			encodings[root.myValue]= path;
-			return;
 		}
-		
+		else {
 		codingHelper(root.myLeft, path+"0",encodings);
 		codingHelper(root.myRight, path+"1",encodings);
+		}
 	}
 
 	private void writeHeader(HuffNode root, BitOutputStream out) {
