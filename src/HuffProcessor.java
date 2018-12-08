@@ -63,12 +63,39 @@ public class HuffProcessor {
 	 *            Buffered bit stream writing to the output file.
 	 */
 	public void decompress(BitInputStream in, BitOutputStream out){
-
+		
+		int bits = in.readBits(BITS_PER_INT);
+		if(bits!= HUFF_TREE) {
+			throw new HuffException("Illegal header starts with" + bits);
+		}
+		
+		HuffNode root = readTreeHeader(in);
+		
+		
 		while (true){
 			int val = in.readBits(BITS_PER_WORD);
 			if (val == -1) break;
 			out.writeBits(BITS_PER_WORD, val);
 		}
 		out.close();
+	}
+
+	private HuffNode readTreeHeader(BitInputStream in) {
+		// TODO Auto-generated method stub
+		int bit = in.readBits(1);
+		if (bit ==-1) {
+			throw new HuffException("Negative Bit Values" + bit);
+		}
+		if(bit ==0) {
+			HuffNode left = readTreeHeader(in);
+			HuffNode right = readTreeHeader(in);
+			return new HuffNode(0,0,left,right);
+		}
+		else {
+			int value= in.readBits(BITS_PER_WORD +1);
+			return new HuffNode(value,0,null,null);
+		}
+		
+
 	}
 }
