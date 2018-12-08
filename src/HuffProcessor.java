@@ -70,7 +70,7 @@ public class HuffProcessor {
 		}
 		
 		HuffNode root = readTreeHeader(in);
-		
+		readCompressedBits(root,in,out);
 		
 		while (true){
 			int val = in.readBits(BITS_PER_WORD);
@@ -78,6 +78,11 @@ public class HuffProcessor {
 			out.writeBits(BITS_PER_WORD, val);
 		}
 		out.close();
+	}
+
+	private void readCompressedBits(HuffNode root, BitInputStream in, BitOutputStream out) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private HuffNode readTreeHeader(BitInputStream in) {
