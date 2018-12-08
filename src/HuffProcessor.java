@@ -70,7 +70,7 @@ public class HuffProcessor {
 		while(true) {
 			int bits = in.readBits(BITS_PER_WORD); 
 			if(bits == -1) break; 
-			freq[bits] = freq[bits] + 1; 
+			freq[bits] = freq[bits] + 1;  
 		}
 		freq[PSEUDO_EOF] = 1; 
 		return freq;
@@ -106,6 +106,7 @@ public class HuffProcessor {
 
 	private void codingHelper(HuffNode root, String path, String[] encodings) {
 		// TODO Auto-generated method stub
+		if(root == null) return; 
 		if(root.myLeft==null && root.myRight==null) {
 			encodings[root.myValue]= path;
 			return;
@@ -117,8 +118,7 @@ public class HuffProcessor {
 
 	private void writeHeader(HuffNode root, BitOutputStream out) {
 		// TODO Auto-generated method stub
-		if(root == null) return; 
-		if(root.myValue == 0) out.writeBits(1, 0);
+		if(root.myLeft != null || root.myRight != null) out.writeBits(1, 0);
 		else {
 			out.writeBits(1, 1);
 			out.writeBits(BITS_PER_WORD + 1, root.myValue);
